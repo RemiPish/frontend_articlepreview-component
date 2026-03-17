@@ -4,39 +4,37 @@ const shareWrap = document.querySelector(".share-wrap");
 const author = document.getElementById("author");
 const authorInfo = document.querySelector(".article__info");
 
-function updateLayout() {
-  const isMobile = window.innerWidth < 768;
-  const popupVisible = !shareOptions.classList.contains("hidden");
+// Stop execution if required elements are missing
+if (!shareBtn || !shareOptions || !shareWrap || !author || !authorInfo) {
+  console.warn("Share component: missing required DOM elements");
+} else {
+  function updateLayout() {
+    const isMobile = window.innerWidth < 768;
+    const popupVisible = !shareOptions.classList.contains("hidden");
 
-  // ---- POPUP OPEN ----
-  if (popupVisible) {
-    if (isMobile) {
-      // Mobile + open
-      author.classList.add("hidden");
-      shareWrap.classList.add("share-option-background");
-      authorInfo.classList.add("no-padding");
+    if (popupVisible) {
+      if (isMobile) {
+        author.classList.add("hidden");
+        shareWrap.classList.add("share-option-background");
+        authorInfo.classList.add("no-padding");
+      } else {
+        author.classList.remove("hidden");
+        shareWrap.classList.remove("share-option-background");
+        authorInfo.classList.remove("no-padding");
+      }
     } else {
-      // Desktop + open
       author.classList.remove("hidden");
       shareWrap.classList.remove("share-option-background");
       authorInfo.classList.remove("no-padding");
     }
   }
 
-  // ---- POPUP CLOSED ----
-  else {
-    // Reset everything
-    author.classList.remove("hidden");
-    shareWrap.classList.remove("share-option-background");
-    authorInfo.classList.remove("no-padding");
-  }
-}
+  shareBtn.addEventListener("click", function () {
+    shareOptions.classList.toggle("hidden");
+    updateLayout();
+  });
 
-shareBtn.addEventListener("click", function () {
-  shareOptions.classList.toggle("hidden");
+  window.addEventListener("resize", updateLayout);
+
   updateLayout();
-});
-
-window.addEventListener("resize", updateLayout);
-
-updateLayout();
+}
