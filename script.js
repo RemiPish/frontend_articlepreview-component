@@ -8,11 +8,24 @@ function updateLayout() {
   const isMobile = window.innerWidth < 768;
   const popupVisible = !shareOptions.classList.contains("hidden");
 
-  if (popupVisible && isMobile) {
-    author.classList.add("hidden");
-    shareWrap.classList.add("share-option-background");
-    authorInfo.classList.add("no-padding");
-  } else {
+  // ---- POPUP OPEN ----
+  if (popupVisible) {
+    if (isMobile) {
+      // Mobile + open
+      author.classList.add("hidden");
+      shareWrap.classList.add("share-option-background");
+      authorInfo.classList.add("no-padding");
+    } else {
+      // Desktop + open
+      author.classList.remove("hidden");
+      shareWrap.classList.remove("share-option-background");
+      authorInfo.classList.remove("no-padding");
+    }
+  }
+
+  // ---- POPUP CLOSED ----
+  else {
+    // Reset everything
     author.classList.remove("hidden");
     shareWrap.classList.remove("share-option-background");
     authorInfo.classList.remove("no-padding");
