@@ -20,7 +20,7 @@ This is a solution to the [Article preview component challenge on Frontend Mento
 
 ### Links
 
- Live Site URL: [Vercel](https://frontend-meetlanding.vercel.app/)
+ Live Site URL: [Vercel](https://frontend-articlepreview-component.vercel.app/)
 
 ## My process
 
